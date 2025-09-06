@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="250" viewBox="0 0 200 250">
+  <defs>
+    <clipPath id="bookshelf-clip">
+      <rect x="0" y="0" width="200" height="245"/>
+    </clipPath>
+  </defs>
+
+  <!-- 선반 -->
+  <rect x="0" y="60" width="200" height="5" fill="#5C3A21"/>
+  <rect x="0" y="120" width="200" height="5" fill="#5C3A21"/>
+  <rect x="0" y="180" width="200" height="5" fill="#5C3A21"/>
+  <rect x="0" y="240" width="200" height="5" fill="#5C3A21"/>
+
+  <!-- 책 그룹, 클리핑 적용 -->
+  <g clip-path="url(#bookshelf-clip)">
+
+    <!-- 1층 책 -->
+    <g transform="skewX(-5)">
+      <rect x="0" y="10" width="10" height="50" fill="#FF6B6B"/>
+      <rect x="10" y="11" width="12" height="49" fill="#FFD93D"/>
+      <rect x="22" y="9" width="15" height="51" fill="#6BCB77"/>
+      <rect x="37" y="12" width="12" height="48" fill="#4D96FF"/>
+      <rect x="49" y="10" width="10" height="50" fill="#F29F05"/>
+      <rect x="59" y="13" width="12" height="47" fill="#FF6EC7"/>
+      <rect x="71" y="10" width="14" height="50" fill="#6FFFB0"/>
+      <rect x="85" y="12" width="10" height="48" fill="#FFDE59"/>
+      <rect x="95" y="11" width="12" height="49" fill="#FF8F3F"/>
+      <rect x="107" y="10" width="10" height="50" fill="#6C63FF"/>
+      <rect x="117" y="13" width="12" height="47" fill="#FF6B6B"/>
+      <rect x="129" y="10" width="10" height="50" fill="#FFD93D"/>
+      <rect x="139" y="12" width="15" height="48" fill="#6BCB77"/>
+      <rect x="154" y="10" width="12" height="50" fill="#4D96FF"/>
+      <rect x="166" y="11" width="10" height="49" fill="#FF6EC7"/>
+      <rect x="176" y="10" width="24" height="50" fill="#F29F05"/>
+    </g>
+
+    <!-- 2층 책 -->
+    <g transform="skewX(-3)">
+      <rect x="0" y="70" width="10" height="50" fill="#4DFFB0"/>
+      <rect x="10" y="72" width="12" height="48" fill="#FF6B6B"/>
+      <rect x="22" y="71" width="8" height="49" fill="#FFD93D"/>
+      <rect x="30" y="70" width="15" height="50" fill="#6BCB77"/>
+      <rect x="45" y="73" width="10" height="47" fill="#4D96FF"/>
+      <rect x="55" y="71" width="12" height="49" fill="#F29F05"/>
+      <rect x="67" y="70" width="8" height="50" fill="#FF6EC7"/>
+      <rect x="75" y="72" width="10" height="48" fill="#6FFFB0"/>
+      <rect x="85" y="70" width="12" height="50" fill="#FFDE59"/>
+      <rect x="97" y="71" width="10" height="49" fill="#FF8F3F"/>
+      <rect x="107" y="70" width="12" height="50" fill="#6C63FF"/>
+      <rect x="119" y="72" width="10" height="48" fill="#FF6B6B"/>
+      <rect x="129" y="70" width="15" height="50" fill="#FFD93D"/>
+      <rect x="144" y="73" width="12" height="47" fill="#6BCB77"/>
+      <rect x="156" y="70" width="10" height="50" fill="#4D96FF"/>
+      <rect x="166" y="72" width="12" height="48" fill="#FF6EC7"/>
+      <rect x="178" y="70" width="22" height="50" fill="#F29F05"/>
+    </g>
+
+    <!-- 3층 책 -->
+    <g transform="skewX(2)">
+      <rect x="0" y="130" width="12" height="50" fill="#6BCB77"/>
+      <rect x="12" y="132" width="15" height="48" fill="#4D96FF"/>
+      <rect x="27" y="128" width="10" height="52" fill="#FF6B6B"/>
+      <rect x="37" y="131" width="12" height="49" fill="#FFD93D"/>
+      <rect x="49" y="129" width="8" height="51" fill="#6FFFB0"/>
+      <rect x="57" y="130" width="15" height="50" fill="#FFDE59"/>
+      <rect x="72" y="132" width="10" height="48" fill="#FF8F3F"/>
+      <rect x="82" y="130" width="12" height="50" fill="#6C63FF"/>
+      <rect x="94" y="131" width="10" height="49" fill="#FF6B6B"/>
+      <rect x="104" y="130" width="15" height="50" fill="#FFD93D"/>
+      <rect x="119" y="132" width="12" height="48" fill="#6BCB77"/>
+      <rect x="131" y="130" width="10" height="50" fill="#4D96FF"/>
+      <rect x="141" y="132" width="12" height="48" fill="#FF6EC7"/>
+      <rect x="153" y="130" width="15" height="50" fill="#F29F05"/>
+      <rect x="168" y="131" width="12" height="49" fill="#6FFFB0"/>
+      <rect x="180" y="130" width="20" height="50" fill="#FFDE59"/>
+    </g>
+
+    <!-- 4층 책 -->
+    <g transform="skewX(1)">
+      <rect x="0" y="190" width="10" height="50" fill="#FF6B6B"/>
+      <rect x="10" y="192" width="12" height="48" fill="#FFD93D"/>
+      <rect x="22" y="189" width="8" height="51" fill="#6BCB77"/>
+      <rect x="30" y="191" width="15" height="49" fill="#4D96FF"/>
+      <rect x="45" y="190" width="12" height="50" fill="#F29F05"/>
+      <rect x="57" y="192" width="10" height="48" fill="#FF6EC7"/>
+      <rect x="67" y="190" width="12" height="50" fill="#6FFFB0"/>
+      <rect x="79" y="191" width="10" height="49" fill="#FFDE59"/>
+      <rect x="89" y="190" width="12" height="50" fill="#FF8F3F"/>
+      <rect x="101" y="192" width="15" height="48" fill="#6C63FF"/>
+      <rect x="116" y="190" width="12" height="50" fill="#FF6B6B"/>
+      <rect x="128" y="191" width="10" height="49" fill="#FFD93D"/>
+      <rect x="138" y="190" width="12" height="50" fill="#6BCB77"/>
+      <rect x="150" y="192" width="15" height="48" fill="#4D96FF"/>
+      <rect x="165" y="190" width="12" height="50" fill="#FF6EC7"/>
+      <rect x="177" y="191" width="20" height="49" fill="#F29F05"/>
+    </g>
+
+  </g>
+</svg>

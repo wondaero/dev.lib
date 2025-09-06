@@ -1,0 +1,318 @@
+html, body{
+    height: 100%;
+}
+.wrapper1120{
+    max-width: 1120px;
+    padding: 0 20px;
+    width: 100%;
+    margin: 0 auto;
+}
+.wrapper{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    & > header{
+        background: #fcfcfc;
+
+        h1{
+            cursor: pointer;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            line-height: 0;
+
+            img{
+                vertical-align: top;
+            }
+        }
+        & > div{
+            max-width: 1120px;
+            padding: 0 20px;
+            width: 100%;
+            margin: 0 auto;
+    
+            display: flex;
+            justify-content: space-between;
+        }
+    
+    
+        h1{
+            margin: 0;
+        }
+    
+        nav:hover .sub-menu{
+            height: 97px;
+        }
+    
+        .main-menu{
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            
+            & > li{
+                width: 100px;
+                margin-right: 10px;
+                text-align: center;
+    
+                &:last-of-type{
+                    margin-right: 0;
+                }
+    
+                & > a{
+                    display: block;
+                    line-height: 40px;
+                    text-decoration: none;
+                    color: #000;
+                }
+            }
+    
+            .sub-menu{
+                transition: height 0.5s linear(0 0%, 0 2.27%, 0.02 4.53%, 0.04 6.8%, 0.06 9.07%, 0.1 11.33%, 0.14 13.6%, 0.25 18.15%, 0.39 22.7%, 0.56 27.25%, 0.77 31.8%, 1 36.35%, 0.89 40.9%, 0.85 43.18%, 0.81 45.45%, 0.79 47.72%, 0.77 50%, 0.75 52.27%, 0.75 54.55%, 0.75 56.82%, 0.77 59.1%, 0.79 61.38%, 0.81 63.65%, 0.85 65.93%, 0.89 68.2%, 1 72.7%, 0.97 74.98%, 0.95 77.25%, 0.94 79.53%, 0.94 81.8%, 0.94 84.08%, 0.95 86.35%, 0.97 88.63%, 1 90.9%, 0.99 93.18%, 0.98 95.45%, 0.99 97.73%, 1 100%);
+                // border-top: 1px solid #eee;
+                
+                list-style: none;
+                margin: 0;
+                padding: 0;
+        
+                height: 0;
+                overflow: hidden;
+
+                &:hover{
+                    background: #ddd;
+                }
+
+                li{
+                    a{
+                        display: block;
+                        line-height: 32px;
+                    }
+                }
+            }
+        }
+    }
+
+    main{
+        flex: 1;
+        background: #fff;
+        overflow-y: auto;
+        // box-shadow: 0 -2px 4px rgba(0, 0, 0, .5);
+    }
+}
+
+.art1{
+    position: relative;
+    // background: #527324;
+    // background: #74bb2a;
+    // background: #555;
+    background: linear-gradient(to bottom, #555, #999);
+    // background-color: #527024;
+    // background-image: linear-gradient(to right, #527324, #527324 5px, #527024 5px, #527024 );
+    // background-size: 10px 100%;
+    z-index: 1;
+    
+    & > div{
+        height: 400px;
+        max-width: 1120px;
+        padding: 0 20px;
+        width: 100%;
+        margin: 0 auto;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .txt{
+            color: #eee;
+            position: relative;
+            z-index: 1;
+    
+            h3{
+                margin: 0 0 20px;
+    
+                font-size: 32px;
+                line-height: 48px;
+                font-weight: 400;
+                
+                strong{
+                    font-weight: 900;
+                    background: linear-gradient(to bottom, transparent 50%, #74bb2a 0);
+                }
+            }
+            
+            h2{
+                font-weight: 900;
+                margin: 0;
+                font-size: 48px;
+                text-shadow: 0 -2px 4px rgba(0, 0, 0, .5);
+            }
+        }
+    
+        .bg{
+            position: relative;
+            & > div{
+                box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+                border: 8px solid #fff;
+                // border-radius: 8px;
+                position: absolute;
+                top: -150px;
+                right: 0;
+                width: 500px;
+                height: 380px;
+                background: url(../imgs/stump_with_books2.png) no-repeat 50%/cover;
+                transform: rotate(-2deg);
+                overflow: hidden;
+        
+                &:after{
+                    content: 'Library with a vision that Embraces the Next genaration and Town';
+                    color: #fff;
+                    opacity: .8;
+                    font-size: 10px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    position: absolute;
+                    bottom: 5px;
+                    right: 5px;
+                }
+            }
+        }
+    
+        img{
+            width: 280px;
+        }
+    }
+
+}
+.art2{
+    position: relative;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:before{
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url(../imgs/search_bg.png) no-repeat 50%/cover;
+        background-attachment: fixed;
+        // filter: grayscale(5);
+        opacity: .2;
+    }
+
+    & > div{
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+    input{
+        width: 320px;
+        height: 40px;
+        background: rgba(255, 255, 255, .95);
+        border: 1px solid #000;
+        padding: 5px 10px;
+    }
+
+    button{
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        width: 80px;
+        line-height: 40px;
+        font-size: 24px;
+        border: 0;
+        background: linear-gradient(135deg, #74bb2a 10px, #000 0);
+        color: #fff;
+        margin-left: 10px;
+        cursor: pointer;
+    }
+}
+
+.art3{
+    
+    & > div{
+        position: relative;
+        height: 400px;
+        margin: 0 auto;
+        max-width: 1120px;
+        padding: 0 20px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+        h4{
+            font-size: 30px;
+            font-weight: 400;
+
+             strong{
+                padding: 4px 8px;
+                background: #74bb2a;
+                color: #fff;
+                border-radius: 10px;
+                margin: 0 4px;
+
+                font-weight: 900;
+             }
+        }
+
+        img{
+            position: absolute;
+            left: 0;
+            bottom: 50px;
+        }
+    }
+}
+.art4{
+    background: #eee;
+    
+    & > div{
+        position: relative;
+        height: 350px;
+        margin: 0 auto;
+        max-width: 1120px;
+        padding: 0 20px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+
+        h4{
+            font-weight: 400;
+            font-size: 30px;
+            line-height: 52px;
+
+             strong{
+                color: #74bb2a;
+
+                font-weight: 900;
+                background: linear-gradient(to bottom, transparent 50%, #fff 0);
+             }
+        }
+
+        img{
+            position: absolute;
+            right: 20px;
+            bottom: 40%;
+            transform: rotate(-2deg);
+        }
+    }
+}
+
+footer{
+    background: #555;
+    color: #111;
+
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, .2);
+
+    & > div{
+        height: 150px;
+        margin: 0 auto;
+        max-width: 1120px;
+        padding: 20px 20px;
+        width: 100%;
+    }
+}
