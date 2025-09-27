@@ -1,18 +1,21 @@
 <script setup>
   import { reactive } from 'vue'
 
+  const props = defineProps({
+    allData: Number,   // 전체 데이터
+    curData: Number, // 현재 데이터
+  })
+
   const state = reactive({
     memberList: [],
   })
   
   const emit = defineEmits(['close']);
 
-  function closePopup(hasData){
-    if(hasData === 'hasData'){
-      emit('close', {aa: 11});
-    }else{
-      emit('close');
-    }
+  if(props.allData === props.curData) closePopup('cur');
+
+  function closePopup(dataType){
+    emit('close', dataType);
   }
 </script>
 
@@ -25,11 +28,16 @@
       </header>
       <main>
         <article class="">
-          <p>데이터 범위를 지정해주세요.</p>
+          <h3>데이터 범위를 지정해주세요.</h3>
+          <p>
+            현재 데이터: {{props.curData}}건
+            <br />
+            전체 데이터: {{props.allData}}건
+          </p>
         </article>
         <article class="btns">
-          <button class="btn-form" @click="closePopup(state.memberList.filter(x => x.selected))">현재 데이터</button>
-          <button class="btn-form" @click="closePopup(state.memberList.filter(x => x.selected))">전체 데이터</button>
+          <button class="btn-form" @click="closePopup('cur')">현재 데이터</button>
+          <button class="btn-form" @click="closePopup('all')">전체 데이터</button>
         </article>
       </main>
     </div>
@@ -52,7 +60,7 @@
     justify-content: center;
 
     & > div{
-      max-width: 480px;
+      max-width: 360px;
       width: 100%;
       background: #fff;
 
@@ -62,7 +70,6 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-
 
         h2{
           margin: 0;
@@ -99,23 +106,7 @@
       main{
         padding: 10px;
 
-        .btn-form{
-          background: var(--main-green);
-          line-height: 40px;
-          width: 60px;
-          border: 0;
-          padding: 0;
-          border-radius: 0;
-          color: #fff;
-
-          &.btn-renew{
-            background: orange;
-          }
-
-          &.w-80px{
-            width: 80px;
-          }
-        }
+        
 
 
         .btns{
@@ -123,8 +114,20 @@
           justify-content: center;
 
           button{
-            width: 120px;
+            width: 100px;
+            background: var(--main-green);
+            line-height: 40px;
+            border: 0;
+            padding: 0;
+            border-radius: 0;
+            color: #fff;
 
+            &:first-of-type{
+              border: 1px solid var(--main-green);
+              background: 0;
+              color: var(--main-green);
+              margin-right: 10px;
+            }
           }
 
         }

@@ -48,6 +48,17 @@ function onlyTel(e) {
   state.formData.tel = e.target.value.replace(/[^0-9-]/g, '')
 }
 
+function sts2kor(sts){
+    const matchTable = {
+        over: '연체중',
+        ing: '대여중',
+        overReturn: '반납(연체)',
+        return: '반납'
+    }
+
+    return matchTable[sts];
+
+}
 
 async function getMemberDetail(id){
     const res = await api.get(`/members/${id}`);
@@ -134,6 +145,10 @@ async function getBookList(id){
                         <strong>전체</strong>
                     </label>
                     <label>
+                        <input type="radio" v-model="state.formData.filter" value="all" @change="getBookList()" />
+                        <strong>최근 한달</strong>
+                    </label>
+                    <label>
                         <input type="radio" v-model="state.formData.filter" value="ing" @change="getBookList()" />
                         <strong>대여중</strong>
                     </label>
@@ -142,25 +157,30 @@ async function getBookList(id){
                         <strong>연체중</strong>
                     </label>
                 </div>
-                <div>
-                    <div>총 <strong>{{ bookList.length }}</strong>건</div>
-                </div>
             </div>
             <div class="list-field">
+                <div class="list-top">
+                    <div>총 <strong>{{ bookList.length }}</strong>건</div>
+                    <div class="list-btns">
+                        <button class="btn-excel" @click="toggleModal()">엑셀 다운로드</button>
+                    </div>
+                </div>
                 <ul>
-                    <li>
+                    <li v-for="item in bookList" :key="item.book_cde">
                         <div class="top">
-                            <div class="left">[EM00010439] 이문열 삼국지. 7</div>
-                            <div class="right"><strong>[199.5]</strong> 애198ㄴ</div>
+                            <div class="left"><strong>[{{ item.book_code }}]</strong> {{ item.title }}</div>
+                            <div class="right"><strong>[{{ item.class_no }}]</strong> {{item.author_code}}</div>
                         </div>
                         <div class="middle">
-                            <div class="left">애니 폭스 지음 ;장은선 옮김 | 뜨인돌</div>
-                            <div class="right"><strong>연체중</strong>(원대로)</div>
+                            <div class="left">{{ item.author_info }} | {{ item.pub_info }}</div>
+                            <div class="right"><strong :class="item.status">{{ sts2kor(item.status) }}</strong></div>
                         </div>
                         <div class="bottom">
                             <div class="left"></div>
                             <div class="right">
-                                11111
+                                <strong>{{ item.loan_dt.split('.')[0].replace('T', ' ') }}</strong>
+                                ~
+                                <strong :class="item.status">{{ (item.return_dt || item.due_dt2 || item.due_dt).split('.')[0].replace('T', ' ') }}</strong>
                             </div>
                         </div>
                     </li>
@@ -274,7 +294,7 @@ async function getBookList(id){
     }
 
     .borrowed-book-field{
-        border-top: 1px dashed #888;
+        border-top: 1px solid #eee;
         margin-top: 30px;
         padding-top: 30px;
 
@@ -291,6 +311,7 @@ async function getBookList(id){
             display: flex;
             align-items: flex-end;
             justify-content: space-between;
+            margin-bottom: 10px;
 
             .tab-ui{
                 display: flex;
@@ -332,6 +353,31 @@ async function getBookList(id){
         }
 
         .list-field{
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .2);
+            // margin-bottom: 10px;
+
+            .list-top{
+                padding-bottom: 10px;
+                border-bottom: 1px dashed #888;
+
+                display: flex;
+                align-items: flex-end;
+                justify-content: space-between;
+
+                .list-btns{
+                    display: flex;
+                    align-items: center;
+
+                    .btn-excel{
+                        background: #0f713c;
+                        color: #fff;
+                        height: 40px;
+                    }
+                }
+            }
 
             ul{
                 list-style: none;
@@ -351,6 +397,55 @@ async function getBookList(id){
                         display: flex;
                         align-items: center;
                         justify-content: space-between;
+
+                        &.top,
+                        &.middle{
+                            .left{
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                white-space: nowrap;
+                                flex: 1;
+                            }
+                        }
+
+                        &.middle{
+                            .right{
+                                strong{
+                                    padding: 0 5px;
+                                    color: #fff;
+                                }
+                                .ing{
+                                    background: #000;
+                                }
+                                .over{
+                                    background: #f00;
+                                }
+                                .overReturn{
+                                    background: orange;
+                                    // color: #000;
+                                }
+                                .return{
+                                    background: green;
+                                }
+                            }
+                        }
+                        &.bottom{
+                            .right{
+                                .ing{
+                                    color: #000;
+                                }
+                                .over{
+                                    color: #f00;
+                                }
+                                .overReturn{
+                                    color: orange;
+                                    // color: #000;
+                                }
+                                .return{
+                                    color: green;
+                                }
+                            }
+                        }
                     }
                 }
             }

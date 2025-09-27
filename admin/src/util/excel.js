@@ -34,10 +34,18 @@ export const exportExcel = async (data, header) => {
     cell.font = { bold: true, color: { argb: 'FF000000' } }; // 볼드 + 검은 글씨
     cell.alignment = { horizontal: 'center', vertical: 'middle' };
   });
+
+  const now = new Date();
+  const timestamp = `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, "0")}${String(
+    now.getDate()
+  ).padStart(2, "0")}_${String(now.getHours()).padStart(2, "0")}${String(
+    now.getMinutes()
+  ).padStart(2, "0")}${String(now.getSeconds()).padStart(2, "0")}`;
+
   
 
   // 브라우저에서 다운로드
   const buffer = await workbook.xlsx.writeBuffer();
   const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-  saveAs(blob, 'example.xlsx');
+  saveAs(blob, `excel_${timestamp}.xlsx`);
 };

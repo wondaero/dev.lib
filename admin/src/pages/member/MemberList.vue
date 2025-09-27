@@ -48,17 +48,26 @@ function goPage(page){
     getMemberList();
 }
 
-
-
-function downloadExcel(){
-    if(0){
-
+function toggleModal(bool){
+    if(typeof bool === 'boolean'){
+        isActiveModal.value = bool;
+        return;
     }
+    isActiveModal.value = !isActiveModal.value; 
+}
 
-    console.log(memberList.value);
+async function closeModal(dataType){
+    toggleModal();
 
-        
-    exportExcel(memberList.value, [
+    if(!dataType) return;
+
+    let listData = memberList.value;
+
+    if(dataType === 'all'){
+        const res = await api.get('/members', { params: {...state.formData, all: 'true' }});
+        listData = res.data.memberList;
+    }
+    exportExcel(listData, [
         { header: 'id', key: 'member_id' },
         { header: '이름', key: 'mbr_nm' },
         { header: '전화번호', key: 'mbr_tel' },
@@ -67,6 +76,9 @@ function downloadExcel(){
         { header: '등록일', key: 'reg_dt' },
     ]);
 }
+
+
+
 
 
 </script>
@@ -108,7 +120,7 @@ function downloadExcel(){
             <div class="list-top">
                 <div>총 <strong>{{ memberCnt }}</strong>건</div>
                 <div class="btns">
-                    <button class="btn-excel" @click="downloadExcel()">엑셀 다운로드</button>
+                    <button class="btn-excel" @click="toggleModal()">엑셀 다운로드</button>
                     <label class="select-form">
                         <select v-model="state.formData.perPage" @change="goPage(1)">
                             <option :value="10">10개씩 보기</option>
@@ -147,7 +159,7 @@ function downloadExcel(){
             @goPage="goPage"
         />
 
-        <ModalAboutExcel @close="closeModal" v-if="isActiveModal" />
+        <ModalAboutExcel @close="closeModal" v-if="isActiveModal" :curData="memberList.length" :allData="memberCnt" />
     </main>
 </template>
 
