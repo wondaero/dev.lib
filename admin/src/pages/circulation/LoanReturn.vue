@@ -134,7 +134,7 @@ function getMember(){
                 <div class="flex align-center">
                     <label class="flex align-center mr-5px">
                         <strong class="title">대여 회원</strong>
-                        <input type="text" v-model="state.memberKeyword" class="input-form w-175px" placeholder="이름(초성 가능)/전화번호" @keyup.enter="getMember()" />
+                        <input type="text" v-model="state.memberKeyword" class="input-form w-175px" placeholder="이름/전화번호" @keyup.enter="getMember()" />
                     </label>
                     <button class="btn-form flex align-center justify-center" @click="getMember()">검색</button>
                 </div>
@@ -144,7 +144,7 @@ function getMember(){
             </div>
         </article>
 
-        <Popup1 @close="closePopup" v-if="isActivePopup"/>
+        <Popup1 @close="closePopup" v-if="isActivePopup" />
     </main>
 </template>
 

@@ -1,7 +1,10 @@
 <script setup>
-import { ref, onMounted, reactive } from "vue"
+import { ref, onMounted, reactive, nextTick } from "vue"
 import api from "@/api/axios"
 import Pagination from '../../components/Pagination.vue'
+import ModalAboutExcel from '../../components/ModalAboutExcel.vue'
+import { exportExcel } from '../../util/excel.js';
+
 
 
 // 반응형 변수 (ref)
@@ -9,6 +12,9 @@ import Pagination from '../../components/Pagination.vue'
 
 const memberList = ref([]);
 const memberCnt = ref(0);
+const isActiveModal = ref(false);   //팝업 노출 여부
+
+const mainContent = ref(null);
 
 const state = reactive({
     formData: {
@@ -30,6 +36,11 @@ async function getMemberList(){
     const res = await api.get('/members', { params: state.formData });
     memberList.value = res.data.memberList;
     memberCnt.value = res.data.membersCnt;
+
+    nextTick(() => {
+      if (mainContent.value) mainContent.value.scrollTop = 0;
+    });
+
 }
 
 function goPage(page){
@@ -38,9 +49,29 @@ function goPage(page){
 }
 
 
+
+function downloadExcel(){
+    if(0){
+
+    }
+
+    console.log(memberList.value);
+
+        
+    exportExcel(memberList.value, [
+        { header: 'id', key: 'member_id' },
+        { header: '이름', key: 'mbr_nm' },
+        { header: '전화번호', key: 'mbr_tel' },
+        { header: '대여중', key: 'loan_count' },
+        { header: '연체중', key: 'is_overdue' },
+        { header: '등록일', key: 'reg_dt' },
+    ]);
+}
+
+
 </script>
 <template>
-    <main>
+    <main ref="mainContent">
         <h2 class="page-title"><span>회원 목록</span></h2>
         <article class="search-field">
             <div class="mb-10px flex align-center">
@@ -77,7 +108,7 @@ function goPage(page){
             <div class="list-top">
                 <div>총 <strong>{{ memberCnt }}</strong>건</div>
                 <div class="btns">
-                    <button class="btn-excel">엑셀 다운로드</button>
+                    <button class="btn-excel" @click="downloadExcel()">엑셀 다운로드</button>
                     <label class="select-form">
                         <select v-model="state.formData.perPage" @change="goPage(1)">
                             <option :value="10">10개씩 보기</option>
@@ -93,12 +124,17 @@ function goPage(page){
             <ul>
                 <li v-for="(item) in memberList" :key="item.member_id">
                     <div class="top">
-                        <div class="left"><router-link :to="`/member/${item.member_id}`">{{ item.mbr_nm || '-' }} [{{ item.member_id }}]</router-link></div>
+                        <div class="left">
+                            <router-link :to="`/member/${item.member_id}`">{{ item.mbr_nm || '-' }} [{{ item.member_id }}]</router-link>
+                            <strong v-if="item.is_overdue || item.loan_count > 0" :class="item.is_overdue ? 'over' : 'ing'">
+                                {{ item.is_overdue ? '연체중' : '대여중' }}
+                            </strong>
+                        </div>
                         <div class="right" :class="{full: item.loan_count === item.mbr_mx_cnt}">대여현황: <strong>{{ item.loan_count }} / {{ item.mbr_mx_cnt }}</strong></div>
                     </div>
                     <div class="bottom">
                         <div class="left">{{ item.mbr_tel || '-' }}</div>
-                        <div class="right"><strong v-if="item.is_overdue">연체중</strong></div>
+                        <div class="right">{{ item.reg_dt.split('.')[0].replace('T', ' ') }}</div>
                     </div>
                 </li>
             </ul>
@@ -110,6 +146,8 @@ function goPage(page){
             :curPageIdx="state.formData.curPageIdx"
             @goPage="goPage"
         />
+
+        <ModalAboutExcel @close="closeModal" v-if="isActiveModal" />
     </main>
 </template>
 
@@ -259,7 +297,7 @@ function goPage(page){
                 }
 
                 select{
-                    width: 120px;
+                    width: 128px;
                 }
             }
 
@@ -290,9 +328,31 @@ function goPage(page){
                     margin-bottom: 5px;
 
 
-                    .left a{
-                        color: #000;
-                        cursor: pointer;
+                    .left{
+                        a{
+                            color: #000;
+                            cursor: pointer;
+                        }
+
+                        strong{
+                            padding: 0 5px;
+                            margin-left: 10px;
+                            border-radius: 5px;
+                            display: inline-flex;
+                            height: 18px;
+                            align-items: center;
+                            vertical-align: middle;
+                            transform: rotate(-2deg);
+                            
+                            &.ing{
+                                color: green;
+                                border: 1px solid green;
+                            }
+                            &.over{
+                                color: #f00;
+                                border: 1px solid #f00;
+                            }
+                        }
                     }
                     .full{
                         font-weight: 900;
@@ -305,15 +365,7 @@ function goPage(page){
                     justify-content: space-between;
 
                     .right{
-                        strong{
-                            color: #f00;
-                            padding: 2px 5px;
-                            border-radius: 5px;
-                            border: 1px solid #f00;
-                            display: inline-block;
-                            vertical-align: top;
-                            transform: rotate(-2deg);
-                        }
+                        
                     }
                 }
             }

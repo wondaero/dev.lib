@@ -4,7 +4,7 @@
   const state = reactive({
     memberList: [],
   })
-  
+
   const emit = defineEmits(['close']);
 
   function closePopup(hasData){
@@ -27,7 +27,7 @@
         <article class="search-field flex align-center">
             <label class="flex align-center mr-5px">
                 <strong class="title">회원</strong>
-                <input type="text" class="input-form w-175px" placeholder="이름(초성 가능)/전화번호"/>
+                <input type="text" class="input-form w-175px" placeholder="이름/전화번호"/>
             </label>
             <button class="btn-form flex align-center justify-center">검색</button>
         </article>
