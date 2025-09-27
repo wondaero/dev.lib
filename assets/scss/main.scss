@@ -279,6 +279,7 @@ html, body{
         width: 100%;
         display: flex;
         align-items: center;
+        justify-content: space-between;
 
         h4{
             font-weight: 400;
@@ -294,9 +295,6 @@ html, body{
         }
 
         img{
-            position: absolute;
-            right: 20px;
-            bottom: 40%;
             transform: rotate(-2deg);
         }
     }

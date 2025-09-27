@@ -233,6 +233,7 @@ html, body {
   width: 100%;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 .art4 > div h4 {
   font-weight: 400;
@@ -245,9 +246,6 @@ html, body {
   background: linear-gradient(to bottom, transparent 50%, #fff 0);
 }
 .art4 > div img {
-  position: absolute;
-  right: 20px;
-  bottom: 40%;
   transform: rotate(-2deg);
 }
 
