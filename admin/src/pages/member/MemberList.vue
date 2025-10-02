@@ -3,7 +3,8 @@ import { ref, onMounted, reactive, nextTick } from "vue"
 import api from "@/api/axios"
 import Pagination from '../../components/Pagination.vue'
 import ModalAboutExcel from '../../components/ModalAboutExcel.vue'
-import { exportExcel } from '../../util/excel.js';
+import { exportExcel } from '../../utils/excel.js';
+import { formatToKST } from '../../utils/common';
 
 
 
@@ -146,7 +147,7 @@ async function closeModal(dataType){
                     </div>
                     <div class="bottom">
                         <div class="left">{{ item.mbr_tel || '-' }}</div>
-                        <div class="right">{{ item.reg_dt.split('.')[0].replace('T', ' ') }}</div>
+                        <div class="right">{{ formatToKST(item.reg_dt) }}</div>
                     </div>
                 </li>
             </ul>
